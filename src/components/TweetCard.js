@@ -22,7 +22,7 @@ class TweetCard extends React.Component{
 
   }
   render(){
-    const { tweet, authedUser } = this.props
+    const { tweet } = this.props
 
     return (
       <div className = 'tweet-card'>
@@ -66,7 +66,6 @@ class TweetCard extends React.Component{
 function mapStateToProps({ authedUser, tweets, users }, { id }){
   const tweet = tweets[id]
   return {
-    authedUser,
     tweet: formatTweet(tweets[id],users[tweet.author],
                       authedUser,tweets[tweet.replyingTo]),
 

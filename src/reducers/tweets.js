@@ -9,7 +9,6 @@ export function tweets(state = {}, action){
         ...action.tweets,
       }
     case LIKE_TWEET:
-      console.log(state,action)
       const tweet = state[action.id]
       const authedUser = action.authedUser
       const likes = action.hasLiked === true
@@ -21,8 +20,6 @@ export function tweets(state = {}, action){
           ...tweet,
           likes
         }
-
-
       }
     default:
       return state
