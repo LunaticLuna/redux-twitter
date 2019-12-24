@@ -13,6 +13,10 @@ li {
   list-style-type: none;
   padding: 10px;
 }
+a{
+  text-decoration: none;
+  color: #252525;
+}
 .center {
   text-align: center;
 }
@@ -94,4 +98,13 @@ li {
 }
 .submit-btn:hover{
   border-color: rgba(0,0,0,.5);
+}
+.nav ul{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+.active{
+  font-weight: bold;
 }

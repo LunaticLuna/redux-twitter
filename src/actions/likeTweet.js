@@ -13,7 +13,13 @@ function likeTweet({ id, hasLiked, authedUser }){
 
 export function handleToggleLike(info){
   return (dispatch) => {
+    dispatch(likeTweet(info))
+
     return saveLikeToggle(info)
-      .then(()=>dispatch(likeTweet(info)))
+      .catch((e) => {
+        console.warn('Error in handleToggleTweet: ', e)
+        dispatch(likeTweet(info))
+        alert('The was an error liking the tweet. Try again.')
+      })
   }
 }

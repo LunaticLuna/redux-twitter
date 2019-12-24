@@ -3,12 +3,15 @@ import { connect } from 'react-redux'
 import { formatTweet, formatDate } from '../utils/helpers'
 import { TiArrowBackOutline, TiHeartFullOutline, TiHeartOutline } from "react-icons/ti";
 import { handleToggleLike } from '../actions/likeTweet'
+import { withRouter, Link } from 'react-router-dom'
 
 class TweetCard extends React.Component{
   toParent(e,parent){
     e.preventDefault()
     console.log('click replying-to button')
     console.log(parent)
+    console.log(this.props)
+    this.props.history.push('/tweet/'+parent.id)
 
   }
   toggleLike = (e,hasLiked) => {
@@ -25,7 +28,7 @@ class TweetCard extends React.Component{
     const { tweet } = this.props
 
     return (
-      <div className = 'tweet-card'>
+      <Link to = {`/tweet/${tweet.id}`} className = 'tweet-card'>
         <img className = 'avatar' src = {tweet.avatar} alt = 'author avatar'/>
         <div>
           <h4 className = 'user-name'>{tweet.name}</h4>
@@ -58,18 +61,20 @@ class TweetCard extends React.Component{
           </div>
 
         </div>
-      </div>
+      </Link>
     )
   }
 }
 
 function mapStateToProps({ authedUser, tweets, users }, { id }){
   const tweet = tweets[id]
+  console.log("here!!!!!!!",tweet)
   return {
+    authedUser,
     tweet: formatTweet(tweets[id],users[tweet.author],
                       authedUser,tweets[tweet.replyingTo]),
 
   }
 }
 
-export default connect(mapStateToProps)(TweetCard)
+export default withRouter(connect(mapStateToProps)(TweetCard))
